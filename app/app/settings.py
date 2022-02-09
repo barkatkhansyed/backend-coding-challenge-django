@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#+&wo)*z!b2wsf3xk62pzfu15$s1nzkyzkm68lrvpx+h-v5q$z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -127,16 +127,14 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-JWT_AUTH = {
-    # how long the original token is valid for
-    'JWT_EXPIRATION_DELTA': timedelta(days=1),
-
-    # allow refreshing of tokens
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'JWT_ALLOW_REFRESH': True,
+}
 
-    # this is the maximum time after the token was issued that
-    # it can be refreshed.
-    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
-    
-    'JWT_VERIFY_EXPIRATION': False,
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+   ),
 }
