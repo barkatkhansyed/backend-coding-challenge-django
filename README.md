@@ -6,19 +6,24 @@ Backend REST API for a simple note-taking app.
 
 ### Application Features:
 * Users can add, delete and modify their notes using django mixins
+* Users must be logged in, in order to view/add/delete/etc. their notes using default django 'isauthenticated' and custom made 'isowner' permissions
+* Notes can be either public or private - Public notes can be viewed without authentication, however they cannot be modified
 * Users can see a list of all their notes using django apiview
 * Users can filter their notes via tags
-* Users must be logged in, in order to view/add/delete/etc. their notes using default django 'isauthenticated' and custom made 'isowner' permissions
 * Search contents of their notes with keywords
-* Notes can be either public or private - Public notes can be viewed without authentication, however they cannot be modified
 * User management API to create new users using default admin panel
-* Token based authentication using jwt
+* Token based authentication using third party package djangorestframework-simplejwt supported by django
 
 ### The model fields:
 * id - pk
-* title, body, tags - represents note details
-* is_public - represents whether note made by user is public or private
+* title, body, tags - represents notes details
+* is_public - represents whether notes made by user is public or private
 * owner - represents the creater of the note
 
-### Testing 🚀
+### Project Setup
+* cd to root folder and run following commands
+* Build the docker image with all dependencies installed: docker build -t image_name:tag_name .
+* To run the image: docker run image_name:tag_name
 
+### Testing 🚀
+* On root folder, run: python manage.py test
